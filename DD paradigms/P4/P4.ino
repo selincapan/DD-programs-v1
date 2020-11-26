@@ -1,10 +1,12 @@
  /*--------------------------------------------------------++
-|| DD_P4 (both lights activation + large reward + with FC) ||
+||     DD_P4 (large reward port introduced + with FC)      ||
 ++--------------------------------------------------------*/
 
 
 
 /*
+ * 
+ * 11/21/2020 Update: Updated event codes & window names 
  * 
  * 11/09/2020 Update: Reorganized the code and comments 
  * 
@@ -17,7 +19,7 @@
  * 1/15/2020 Update: Included # of incorrect poke counts during trial window
  * (when reponse ports light up)
  *
- * PARADIGM: DD P4 
+ * PARADIGM: Delay Discounting 
  *
  * DESCRIPTION: Refer to Logic Flow Diagram for more detailed information
  *
@@ -46,12 +48,8 @@
  * COPYRIGHT: SC/JHL/ Nautiyal Lab
  *            + Open Source Arduino Forum
  *
- *  ## CHANGED IN G5 (group 5)
- * NOTES::: automatically subtracts one from the final count for relevant windows!!
- *     1) incorrect pokes before trial initiation
- *     2) Pokes during the trial window
- * (CODE: xx29)
- * (CODE: xx89) --> currently (2/14/20) not included in analysis
+ *
+ *
  */
 
 
@@ -62,11 +60,11 @@
 #include "IR.h"
 #include "begin_trial.h"
 #include "push_button.h"
-#include "m_port_operate.h"
+#include "m_port_operate.h"  
 #include "l_port_operate.h" //used in FC trials
 #include "r_port_operate.h" //used in FC trials 
 
-String paradigm = "DD_P4_ll_v1"; // left port is the large reward port
+String paradigm = "DD_P4_ll_v1";  // ll == left port is the large reward port
 
 // * * * * * * * * * * * S E T U P * * * * * * * * * * * * * * *
 
@@ -124,19 +122,19 @@ void loop() {
     // SO THAT below if statements don't get evaluated!!!
     // (otherwise, current_port will always be either 1 or 2 --> leading to unexpected results!)
 
-    if (current_port == 1) {      //a FC trial with left port on (large reward) 
+    if (current_port == 1) {      // a FC trial with left port on (large reward) 
       // delay(1);
       activate_left_led();
       activate_left_sol();
       }
 
-    else if (current_port == 2) { //a FC trial with right port on (small reward) 
+    else if (current_port == 2) { // a FC trial with right port on (small reward) 
       // delay(1);
       activate_right_led();
       activate_right_sol();
       }
       
-    else if (current_port > 2) {  //a standard P4 trial with both ports on 
+    else if (current_port > 2) {  // a standard P4 trial with both ports on 
       // delay(1);
       activate_middle_led();
       activate_middle_sol();

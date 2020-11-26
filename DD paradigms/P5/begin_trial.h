@@ -4,8 +4,8 @@
 
 void begin_new_trial() {
 
-  static unsigned long trial_initiation_window_start_time = 0;
-  static unsigned long trial_initiation_window_end_time = 0;
+  static unsigned long initiation_window_start_time = 0;
+  static unsigned long initiation_window_end_time = 0;
 
   static unsigned long iti_window_start_time = 0;
   static unsigned long iti_window_end_time = 0;
@@ -17,32 +17,27 @@ void begin_new_trial() {
   // Initiate New Trial (Parent IF)
   if (initiate_new_trial){
 
-    // Trial Initiation Window hasn't started yet - BLINK!!
-    if ((initiate_trial_delay == false) && (trial_initiation_window == false) && (valid_trial_window == false)){
+    // Initiation Window hasn't started yet - BLINK!!
+    if ((initiate_trial_delay == false) && (initiation_window == false) && (valid_response_window == false)){
 
        // initiate_trial_delay boolean added as a condition so that this loop doesn't get evaluated
        //+.0
 
-       // start Trial Initiation Window
-       trial_initiation_window = true;
+       // start Initiation Window
+       initiation_window = true;
 
        // * * DON'T USE for loops for toggling components - always use STATES!! * *
        // for (byte i = 8; i <=10; i++) { digitalWrite(i, HIGH);}
 
-       // Turn ON All three LEDs
-       // led_state_L = HIGH;  digitalWrite(port_led_L, led_state_L);
-       // led_state_M = HIGH;  digitalWrite(port_led_M, led_state_M);
-       // led_state_R = HIGH;  digitalWrite(port_led_R, led_state_R);
-
-       trial_initiation_window_start_time = millis();
+       initiation_window_start_time = millis();
        Serial.print(F("5521:"));
-       Serial.println(trial_initiation_window_start_time);
+       Serial.println(initiation_window_start_time);
 
        }
 
-    // TRIAL WINDOW --> BLINKING WINDOW!
-     // As long as trial window (state) is valid, BLINK the middle port!
-     if (trial_initiation_window){
+    // INITIATION WINDOW --> BLINKING WINDOW!
+     // As long as initiation window (state) is valid, BLINK the middle port!
+     if (initiation_window){
 
          unsigned long current_m_LED_millis = millis();
 
@@ -73,14 +68,14 @@ void begin_new_trial() {
      }
 
 
-    // Poke in Middle Port(IR.h) initiates Valid Trial:
+    // Poke in Middle Port(IR.h) initiates new Valid Trial (i.e. the response window):
 
-    // If mouse pokes in MIDDLE port and initiates trial, --> LED turns off!! (all three should turn off!)
+    // If mouse pokes in MIDDLE port and initiates trial, --> LED turns off!! 
     // Also when trial delay window didn't start
     // (MOUSE CAN POKE REGARDLESS OF BLINK CYCLE - either ON or OFF cycle!) --> goverened by the STATE!
 
-    // (Valid trial window toggles TRUE if poke in middle port (see IR.h))
-    if ((initiate_trial_delay == false) && (valid_trial_window)) {
+    // (Valid response window toggles TRUE if poke in middle port (see IR.h))
+    if ((initiate_trial_delay == false) && (valid_response_window)) {
 
        // * * DON'T USE for loops for toggling components - always use STATES!! * *
        // for (byte i = 8; i <=10; i++) { digitalWrite(i, LOW);}
@@ -90,20 +85,20 @@ void begin_new_trial() {
        led_state_M = LOW;  digitalWrite(port_led_M, led_state_M);
        led_state_R = LOW;  digitalWrite(port_led_R, led_state_R);
 
-       trial_initiation_window_end_time = millis();
+       initiation_window_end_time = millis();
        Serial.print(F("5520:"));
-       Serial.println(trial_initiation_window_end_time);
+       Serial.println(initiation_window_end_time);
 
-       // Initiate Delay Window
+       // Initiate Trial Delay Window (1 ms for a standard DD paradigm) 
        initiate_trial_delay = true;
 
        }
 
     if (initiate_trial_delay){
 
-      // this code allows the experimenter to introduce a delay between the trial initiation and trial window 
+      // this code allows the experimenter to introduce a delay between the initiation window and response window 
       // no used in a standard DD paradigm (trial_delay_duration = 1 ms; virtually 0) 
-       if ((millis() - trial_initiation_window_end_time) >= trial_delay_duration) {
+       if ((millis() - initiation_window_end_time) >= trial_delay_duration) {
 
          initiate_trial_delay = false;  // toggle boolean
 
@@ -112,7 +107,7 @@ void begin_new_trial() {
 
          // Serial.println("delay loop");
 
-         // # of poke counts during delay window (between trial initiation and port activation)
+         // # of poke counts during delay window (between trial initiation and response window)
          // Serial.print(F("dw_counter_l::"));   // 75xx  (left counter during delay window)
          // Serial.println(left_port_counter);
          // Serial.print(F("dw_counter_m::"));    // 85xx (middle counter during delay window)

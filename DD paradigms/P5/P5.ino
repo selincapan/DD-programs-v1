@@ -5,6 +5,7 @@
 
 
 /*
+ * 11/26/2020 Update: updated event codes and window names 
  * 
  * 11/9/2020 Update: eliminated incorrect pokes from free choice trials + organized the code & comments 
  * 
@@ -15,7 +16,7 @@
  * 1/15/2020 Update: Included # of incorrect poke counts during trial window
  * (when reponse ports light up)
  *
- * PARADIGM:
+ * PARADIGM: Delay Discounting 
  *
  * DESCRIPTION: Refer to Logic Flow Diagram for more detailed information
  *

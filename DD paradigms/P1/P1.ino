@@ -5,8 +5,10 @@
 
 
 /*
+ * 11/21/2020 Update: updated event codes & window names 
  *
- * PARADIGM:
+ *
+ * PARADIGM: Delay Discounting
  *
  * DESCRIPTION: Refer to Logic Flow Diagram for more detailed information
  *
@@ -84,7 +86,7 @@ void setup(){
     Serial.print("Paradigm: ");
     Serial.println(paradigm);
 
-    // initialize initiate_trial_window to true to start program
+    // initialize initiate_response_window to true to start program
     initiate_new_trial = true;
 
     // initiate random_idx to pick the first idx for Inter-Trial Interval

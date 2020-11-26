@@ -11,14 +11,14 @@
 boolean initiate_new_trial;
 
 // booleans for windows (different states)
-boolean trial_initiation_window;
-boolean valid_trial_window;
+boolean initiation_window;
+boolean valid_response_window;
 
 boolean reward_window;
 boolean reward_cue_window;
 
 boolean start_iti_window;
-boolean initiate_delay;
+boolean initiate_trial_delay;
 
 
 // counters / type ints

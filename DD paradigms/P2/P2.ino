@@ -6,7 +6,10 @@
 
 /*
  *
- * PARADIGM:
+ * 11/21/2020 Update: updated event codes & window names 
+ *
+ *
+ * PARADIGM: Delay Discounting 
  *
  * DESCRIPTION: Refer to Logic Flow Diagram for more detailed information
  *
@@ -34,7 +37,7 @@
  *
  *
  *
- * COPYRIGHT: JHL/ Nautiyal Lab
+ * COPYRIGHT: SC/JHL/ Nautiyal Lab
  *            + Open Source Arduino Forum
  *
  *  ## CHANGED IN G5 (group 5)
@@ -76,13 +79,11 @@ void setup(){
     // pinMode (11, INPUT); // modified pin #s
     // pinMode (13, INPUT); // modified pin #s
 
-
-
     Serial.begin(115200);
     Serial.print("Paradigm: ");
     Serial.println(paradigm);
 
-    // initialize initiate_trial_window to true to start program
+    // initialize initiate_response_window to true to start program
     initiate_new_trial = true;
 
     // initiate random_idx to pick the first idx for Inter-Trial Interval

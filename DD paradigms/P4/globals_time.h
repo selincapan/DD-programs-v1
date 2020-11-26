@@ -5,17 +5,17 @@
 
 #define NUM_TIMES 12
 
-unsigned long iti_interval[NUM_TIMES] = {30000, 32000, 34000, 37000, 40000, 45000, 47000, 50000, 51000, 55000, 57000, 60000};
+//unsigned long iti_interval[NUM_TIMES] = {30000, 32000, 34000, 37000, 40000, 45000, 47000, 50000, 51000, 55000, 57000, 60000};
 
 // TEST ITIs
-// unsigned long iti_interval[NUM_TIMES] = {6000, 5000, 5000, 6000, 6000, 6000, 5000, 6000, 6000, 6000, 6000, 6000};
+unsigned long iti_interval[NUM_TIMES] = {6000, 5000, 5000, 6000, 6000, 6000, 5000, 6000, 6000, 6000, 6000, 6000};
 // unsigned long iti_interval[NUM_TIMES] = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000};
 
 // Durations
 //const int led_on_duration = 10000;
 //const int void_window = 3000;  // time_window when no response will be valid even if poke occurs
 
-const int solenoid_on_duration = 72;   // solenoid on interval: 72 ms  = 10ul
+const int solenoid_on_duration = 115;   // solenoid on interval: 115 ms  = 10ul
 const int led_trial_duration = 5000;
 const int trial_delay_duration = 1;   // 1 ms FOR A STANDARD DD PARADIGM; CHANGE LATER IF YOU WANT A DELAY BEFORE THE TRIAL WINDOW 
 

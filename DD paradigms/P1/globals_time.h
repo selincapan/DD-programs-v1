@@ -18,9 +18,9 @@ unsigned long iti_interval[NUM_TIMES] = {30000, 32000, 34000, 37000, 40000, 4500
 //const int led_on_duration = 10000;
 //const int void_window = 3000;  // time_window when no response will be valid even if poke occurs
 
-const int solenoid_on_duration = 72;  // solenoid on interval: 72 ms  = 10ul
+const int solenoid_on_duration = 115;       // solenoid on interval: 115 ms  = 10ul
 
-const int reward_cue_duration = 3000;     // CHANGE LATER
+const int reward_cue_duration = 3000;       // CHANGE LATER
 
 
 

@@ -11,7 +11,7 @@
 boolean initiate_new_trial;
 
 // booleans for windows (different states)
-boolean trial_window;
+boolean response_window;
 boolean reward_window;
 boolean reward_cue_window;
 

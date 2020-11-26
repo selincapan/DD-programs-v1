@@ -1,14 +1,16 @@
  /*--------------------------------------------------------++
-||              DD_P3 (both lights activation)            ||
+||            DD_P3 (initation window introduced)          ||
 ++--------------------------------------------------------*/
 
 
 
 /*
- * 1/15/2020 Update: Included # of incorrect poke counts during trial window
+ * 11/21/2020 Update: update event codes & window names 
+ * 
+ * 1/15/2020 Update: Included # of incorrect poke counts during response window
  * (when reponse ports light up)
  *
- * PARADIGM:
+ * PARADIGM: Delay Discounting
  *
  * DESCRIPTION: Refer to Logic Flow Diagram for more detailed information
  *
@@ -35,7 +37,7 @@
  *
  *
  *
- * COPYRIGHT: JHL/ Nautiyal Lab
+ * COPYRIGHT: SC/ JHL/ Nautiyal Lab
  *            + Open Source Arduino Forum
  *
  *  ## CHANGED IN G5 (group 5)
@@ -83,7 +85,7 @@ void setup(){
     Serial.print("Paradigm:");
     Serial.println(paradigm);
 
-    // initialize initiate_trial_window to true to start program
+    // initialize initiate_new_trial to true to start program
     initiate_new_trial = true;
 
     // initiate random_idx to pick the first idx for Inter-Trial Interval

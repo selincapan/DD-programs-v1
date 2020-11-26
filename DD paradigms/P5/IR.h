@@ -48,16 +48,16 @@ void record_IR() {
       poke_in_M = true;
       mid_port_counter += 1;       // mid port counter
 
-      if (trial_initiation_window){
+      if (initiation_window){
 
-        // Prints Out number of invalid pokes made during pre-trial phase (when 3 lights are ON)
+        // Prints Out number of invalid pokes made during pre-trial phase (when middle port is blinking) 
         // (number of pokes in left/right ports before initiation in the middle port)
         // (# of mid port is always going to be 1 (ONE))
         //    --> since trial need to be initiated to print out below statements
 
         // CHANGED HERE (2/14/20) --> automatically subtract one from mid_port_counter to account for poke to receive reward
 
-        // # of poke counts during trial window (before VALID trial window)
+        // # of poke counts during initiation window (before VALID response window)
         Serial.print(F("7529::"));   // 75xx
         Serial.println(left_port_counter);
         Serial.print(F("8529::"));    // 85xx
@@ -65,11 +65,11 @@ void record_IR() {
         Serial.print(F("9529::"));  // 95xx
         Serial.println(right_port_counter);
 
-        trial_initiation_window = false;   // end of trial window
-        valid_trial_window = true; // start of valid trial
+        initiation_window = false;    // end of initiation window
+        valid_response_window = true; // start of a valid trial 
 
-        // reset all counters once valid_trial_window starts (is true)
-        // allows me to count the "valid" pokes after trial initiation (valid trial window)
+        // reset all counters once valid_response_window starts (is true)
+        // allows me to count the "valid" pokes after trial initiation 
         // --> "valid" pokes used to detect incorrect port choices once valid trial starts (L/R port turns on)
         // ex) if # of pokes in L/M/R port > 0,
         //        --> I know that the mouse made an incorrect decision so I can invalidate the whole trial (turn off lights)
@@ -90,12 +90,6 @@ void record_IR() {
       poke_in_M = false;
 
     }
-
-    // 11-11-19 UPDATE; TRIAL WINDOW IS NOW A WINDOW with alternating on/off cycles
-    // thus must be reactive to both on--> off and off--> on cases
-    // If mouse pokes in the MIDDLE port during the trial window period, activate VALID TRIAL
-
-
 
   }
 

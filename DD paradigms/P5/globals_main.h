@@ -11,8 +11,8 @@
 boolean initiate_new_trial;
 
 // booleans for windows (different states)
-boolean trial_initiation_window;
-boolean valid_trial_window;
+boolean initiation_window;
+boolean valid_response_window;
 
 boolean reward_window;
 boolean reward_cue_window;
@@ -38,7 +38,7 @@ int right_port_counter = 0;
 //count number of trials (to set the first 10 as FC) 
 int count = 0; 
 
-//Used to determine whether a forced choice (FC) or free choice trial will be execurted 
+// Used to determine whether a forced choice (FC) or free choice trial will be execurted 
 int trial_type[20] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
 int trial_type_idx = 0; //used to move through this array 
 

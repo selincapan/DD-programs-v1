@@ -4,8 +4,8 @@
 
 void begin_new_trial() {
 
-  static unsigned long trial_window_start_time = 0;
-  static unsigned long trial_window_end_time = 0;
+  static unsigned long response_window_start_time = 0;
+  static unsigned long response_window_end_time = 0;
 
   static unsigned long iti_window_start_time = 0;
   static unsigned long iti_window_end_time = 0;
@@ -19,11 +19,11 @@ void begin_new_trial() {
 
       // transition_to_reward = false;  // so that solenoid doesnt'get activated
 
-    // Trial Window hasn't started yet - If all lights are turned OFF, TURN ON Middle light
-    if ((trial_window == false) && (reward_window == false)){
+    // Response Window hasn't started yet - If all lights are turned OFF, TURN ON Middle light
+    if ((response_window == false) && (reward_window == false)){
 
-       // start Trial Window Period
-       trial_window = true;
+       // start Response Window Period
+       response_window = true;
 
        // * * DON'T USE for loops for toggling components - always use STATES!! * *
        // for (byte i = 8; i <=10; i++) { digitalWrite(i, HIGH);}
@@ -31,9 +31,9 @@ void begin_new_trial() {
        // Turn ON Middle LED
        led_state_M = HIGH;  digitalWrite(port_led_M, led_state_M);
 
-       trial_window_start_time = millis();
+       response_window_start_time = millis();
        Serial.print(F("5521:"));
-       Serial.println(trial_window_start_time);
+       Serial.println(response_window_start_time);
 
        }
 

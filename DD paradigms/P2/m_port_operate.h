@@ -13,13 +13,6 @@ void activate_middle_port() {
      static unsigned long solenoid_off_time = 0;
 
      static unsigned long iti_start_time = 0;
-     // static unsigned long reward_retrieval_time = 0;
-
-     // static unsigned long valid_poke_timer = 0;
-     // static unsigned long invalid_poke_timer = 0;
-
-      // solenoid_active_L becomes false only after ITI time expires
-      // Valid trial has started: Turn on left LED
 
      if (reward_window) {
 
@@ -38,10 +31,10 @@ void activate_middle_port() {
            solenoid_on_time = millis();
            // Serial.print(F("Valid led On:"));
 
-           Serial.print(F("8171:")); // Timestamp for Valid Light On
+           Serial.print(F("81171:"));  // Timestamp for Free Choice Valid Light On
            Serial.println(led_on_time);
 
-           Serial.print(F("8271:"));     // MIDDLE SOLENOID ON Timestamp for Valid Solenoid On
+           Serial.print(F("81271:"));     // MIDDLE SOLENOID ON Timestamp for Free Choice Valid Solenoid On
            Serial.println(solenoid_on_time);
 
            reward_cue_window = true;
@@ -58,7 +51,7 @@ void activate_middle_port() {
           solenoid_off_time = millis();
           // Serial.print(F("valid_solenoid_off:"));
 
-          Serial.print(F("8270:"));   // MIDDLE SOLENOID Timestamp for Valid Solenoid Off
+          Serial.print(F("81270:"));   // MIDDLE SOLENOID Timestamp for Valid Solenoid Off
           Serial.println(solenoid_off_time);
         }
 
@@ -73,15 +66,23 @@ void activate_middle_port() {
           led_off_time = millis();
           // Serial.print(F("Invalid led Off:"));
 
-          Serial.print(F("8170:"));    // Omission Trial END Timestamp (LEFT PORT OMISSION)
+          Serial.print(F("81170:"));    // free choice valid led off 
           Serial.println(led_off_time);
 
           start_iti_window = true;
           iti_start_time = millis();
 
+          // # of poke counts during reward window (between when reward is given and reward cue turns off) 
+          Serial.print("71549::");   // 715xx
+          Serial.println(left_port_counter);
+          Serial.print("71549::");    // 815xx
+          Serial.println(mid_port_counter);
+          Serial.print("71549::");  // 915xx
+          Serial.println(right_port_counter);
+
           // RESET counter for poke counts during iti window
-          left_port_counter = 0;  // reset any port counters before TRIAL WINDOW starts (so that any invalid pokes get resetted during iti window)
-          mid_port_counter = 0;   //  (could also be a measure of incorrect pokes during a certain TIMEFRAME)
+          left_port_counter = 0;  
+          mid_port_counter = 0;   
           right_port_counter = 0;
 
         }
@@ -93,11 +94,11 @@ void activate_middle_port() {
           if ((millis() - iti_start_time) >= iti_interval[random_idx]) {
 
             // # of poke counts during iti window
-            Serial.print("7519::");   // 75xx
+            Serial.print("71519::");   // 715xx
             Serial.println(left_port_counter);
-            Serial.print("8519::");    // 85xx
+            Serial.print("81519::");    // 815xx
             Serial.println(mid_port_counter);
-            Serial.print("9519::");  // 95xx
+            Serial.print("91519::");  // 915xx
             Serial.println(right_port_counter);
 
             get_random_iti = true;

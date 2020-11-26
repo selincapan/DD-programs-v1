@@ -20,7 +20,7 @@ unsigned long iti_interval[NUM_TIMES] = {30000, 32000, 34000, 37000, 40000, 4500
 
 const int solenoid_on_duration = 72;  // solenoid on interval: 72 ms  = 10ul
 const int led_trial_duration = 5000;
-const int delay_duration = 1;     // CHANGE LATER
+const int trial_delay_duration = 1;     // CHANGE LATER
 
 const int reward_cue_duration = 3000;     // CHANGE LATER
 

@@ -1,5 +1,5 @@
 /*--------------------------------------------------------++
-||                    Operate Left Port                   ||
+||                  Operate Middle Port                   ||
 ++--------------------------------------------------------*/
 
 // Solenoid Reward will only be from the middle port!
@@ -39,10 +39,10 @@ void activate_middle_port() {
            // Serial.print(F("Valid led On:"));
 
            // Reward Cue ON
-           Serial.print(F("8171:")); // Timestamp for Valid Light On
+           Serial.print(F("82171:")); // Timestamp for FC Valid Light On
            Serial.println(led_on_time);
 
-           Serial.print(F("8271:"));     // MIDDLE SOLENOID ON Timestamp for Valid Solenoid On
+           Serial.print(F("82271:"));     // MIDDLE SOLENOID ON Timestamp for FC Valid Solenoid On
            Serial.println(solenoid_on_time);
 
            reward_cue_window = true;
@@ -59,7 +59,7 @@ void activate_middle_port() {
           solenoid_off_time = millis();
           // Serial.print(F("valid_solenoid_off:"));
 
-          Serial.print(F("8270:"));   // MIDDLE SOLENOID Timestamp for Valid Solenoid Off
+          Serial.print(F("82270:"));   // MIDDLE SOLENOID Timestamp for Valid Solenoid Off
           Serial.println(solenoid_off_time);
         }
 
@@ -76,11 +76,20 @@ void activate_middle_port() {
 
 
           // LED_M_off
-          Serial.print(F("8170:"));    // Omission Trial END Timestamp (LEFT PORT OMISSION)
+          Serial.print(F("82170:"));    // FC valid LED off 
           Serial.println(led_off_time);
 
           start_iti_window = true;
           iti_start_time = millis();
+
+          
+          // POKEs during the REWARD Window (pokes between when the reward has been dispensed ("click heard") and reward cue turns off)  
+          Serial.print("72549::");   // 725xx
+          Serial.println(left_port_counter);
+          Serial.print("82549::");    // 825xx
+          Serial.println(mid_port_counter);
+          Serial.print("92549::");  // 925xx
+          Serial.println(right_port_counter);
 
           // RESET counter for poke counts during iti window
           left_port_counter = 0;  // reset any port counters before TRIAL WINDOW starts (so that any invalid pokes get resetted during iti window)
@@ -96,11 +105,11 @@ void activate_middle_port() {
           if ((millis() - iti_start_time) >= iti_interval[random_idx]) {
 
             // # of poke counts during iti window
-            Serial.print("7519::");   // 75xx
+            Serial.print("72519::");   // 75xx
             Serial.println(left_port_counter);
-            Serial.print("8519::");    // 85xx
+            Serial.print("82519::");    // 85xx
             Serial.println(mid_port_counter);
-            Serial.print("9519::");  // 95xx
+            Serial.print("92519::");  // 95xx
             Serial.println(right_port_counter);
 
             get_random_iti = true;

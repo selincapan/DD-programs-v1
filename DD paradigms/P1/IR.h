@@ -11,7 +11,7 @@ void record_IR() {
   static unsigned long Poke_On_Time_M = 0;
   static unsigned long Poke_Off_Time_M = 0;
 
-  static unsigned long trial_window_end_time = 0;
+  static unsigned long response_window_end_time = 0;
 
   static unsigned long Poke_On_Time_R = 0;
   static unsigned long Poke_Off_Time_R = 0;
@@ -50,38 +50,30 @@ void record_IR() {
       poke_in_M = true;
       mid_port_counter += 1;       // mid port counter
 
-      if (trial_window){
-
-        // Prints Out number of invalid pokes made during pre-trial phase (when 3 lights are ON)
-        // (number of pokes in left/right ports before initiation in the middle port)
-        // (# of mid port is always going to be 1 (ONE))
-        //    --> since trial need to be initiated to print out below statements
-
-
-        // CHANGED HERE (2/14/20) --> automatically subtract one from mid_port_counter to account for poke to receive reward
+      if (response_window){
         
-        // # of poke counts during trial window (before VALID trial window)
-        Serial.print(F("7529::"));   // 75xx
+        // # of poke counts during response window (Forced choice event code, since only middle pokes are valid) 
+        Serial.print(F("72589::"));   // 75xx
         Serial.println(left_port_counter);
-        Serial.print(F("8529::"));    // 85xx
+        Serial.print(F("82589::"));    // 85xx
         Serial.println(mid_port_counter - 1);
-        Serial.print(F("9529::"));  // 95xx
+        Serial.print(F("92589::"));  // 95xx
         Serial.println(right_port_counter);
 
         left_port_counter = 0;
         mid_port_counter = 0;
         right_port_counter = 0;
 
-        trial_window = false;   // end of trial window
+        response_window = false;   // end of trial window
         reward_window = true; // start of valid trial
 
         // Originally from "begin_trial.h"
         // Nominally turns light off (bc its going to get turned on anyways)
         led_state_M = LOW;  digitalWrite(port_led_M, led_state_M);
 
-        trial_window_end_time = millis();
+        response_window_end_time = millis();
         Serial.print(F("5520:"));
-        Serial.println(trial_window_end_time);
+        Serial.println(response_window_end_time);
 
         // random_port WILL ALWAYS RETURN 55 (code for middle port)
         get_random_port = true;
@@ -98,11 +90,6 @@ void record_IR() {
       poke_in_M = false;
 
     }
-
-    // 11-11-19 UPDATE; TRIAL WINDOW IS NOW A WINDOW with alternating on/off cycles
-    // thus must be reactive to both on--> off and off--> on cases
-    // If mouse pokes in the MIDDLE port during the trial window period, activate VALID TRIAL
-
 
 
   }
