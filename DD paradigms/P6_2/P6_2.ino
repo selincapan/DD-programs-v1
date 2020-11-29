@@ -6,6 +6,8 @@
 
 
 /*
+ * 11/26/2020 Update: update event codes and window names 
+ * 
  * 11/10/2020 Update: eliminate incorrect pokes from free choice trials + organized the code & comments 
  * 
  * 10/13/2020 Update: Included forced choice (FC) trials + introduced large reward port + made both ports active for free choice trials 
@@ -13,7 +15,7 @@
  * 1/15/2020 Update: Included # of incorrect poke counts during trial window
  * (when reponse ports light up)
  *
- * PARADIGM:
+ * PARADIGM: Delated Discounting 
  *
  * DESCRIPTION: Refer to Logic Flow Diagram for more detailed information
  *
@@ -62,7 +64,7 @@
 #include "l_port_operate.h" //used in FC trials
 #include "r_port_operate.h" //used in FC trials 
 
-String paradigm = "DD_P6_2_ll_v1";  // ll = left large (left port is the large reward port)
+String paradigm = "DD_P6_2_ll_vf";  // ll = left large (left port is the large reward port)
 
 // * * * * * * * * * * * S E T U P * * * * * * * * * * * * * * *
 

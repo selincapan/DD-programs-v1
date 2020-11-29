@@ -11,8 +11,8 @@
 boolean initiate_new_trial;
 
 // booleans for windows (different states)
-boolean trial_initiation_window;
-boolean valid_trial_window;
+boolean initiation_window;
+boolean valid_response_window;
 
 boolean reward_window;
 boolean reward_cue_window;
@@ -20,7 +20,7 @@ boolean reward_cue_window;
 boolean start_iti_window;
 boolean initiate_trial_delay;  //can be used to initiate a delay before trial window 
 boolean initiate_reward_delay; //used to initiate delay before the reward is dispensed 
-boolean initiate_iti_delay;    //used to ensure large and small reward trials are the same length 
+boolean initiate_iti_delay;    //used to ensure large and small reward trials are the same duration  
 
 // tracks whether a small reward should be dispensed 
 boolean give_small_reward = false;  

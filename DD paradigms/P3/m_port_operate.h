@@ -147,16 +147,18 @@ void activate_middle_sol () {
             Serial.print(F("81271:"));     // MIDDLE SOLENOID Timestamp for Free Choice Valid Solenoid On
             Serial.println(solenoid_on_time);
 
-            // before REWARD light comes on 
-            left_port_counter = 0;
-            mid_port_counter = 0;
-            right_port_counter = 0;
-
-
             // Reward Cue ON (Reward Cue Window ON)
             reward_cue_window = true;
             led_state_M = HIGH;
             digitalWrite(port_led_M, led_state_M);
+
+            Serial.print(F("81171:"));     // LED ON
+            Serial.println(solenoid_on_time);
+
+            left_port_counter = 0;
+            mid_port_counter = 0;
+            right_port_counter = 0;
+
 
           }
 

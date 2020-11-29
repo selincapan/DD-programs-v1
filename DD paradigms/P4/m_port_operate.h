@@ -149,7 +149,7 @@ void activate_middle_sol () {
             led_state_M = HIGH;
             digitalWrite(port_led_M, led_state_M); 
 
-            Serial.print(F("82171:"));    // Timestamp for FC Valid Light On
+            Serial.print(F("81171:"));    // Timestamp for FC Valid Light On
             Serial.println(solenoid_on_time);
 
             // REWARD WINDOW COUNTS (reset to count the number of reward window pokes) 

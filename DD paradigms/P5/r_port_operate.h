@@ -164,7 +164,6 @@ void activate_right_sol () {
             Serial.print(F("82171:"));    // Timestamp for FC Valid Light On
             Serial.println(solenoid_on_time);
 
-            
             // reset port counters for pokes during REWARD window 
             left_port_counter = 0;   
             mid_port_counter = 0;

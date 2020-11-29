@@ -28,13 +28,18 @@ void begin_new_trial() {
        // * * DON'T USE for loops for toggling components - always use STATES!! * *
        // for (byte i = 8; i <=10; i++) { digitalWrite(i, HIGH);}
 
-       // Turn ON Left / Right LED (Stimulus Ports)
-       led_state_L = HIGH;  digitalWrite(port_led_L, led_state_L);
-       led_state_R = HIGH;  digitalWrite(port_led_R, led_state_R);
-
        response_window_start_time = millis();
        Serial.print(F("5521:"));
        Serial.println(response_window_start_time);
+
+       // Turn ON Left / Right LED (Stimulus Ports)
+       led_state_L = HIGH;  digitalWrite(port_led_L, led_state_L);
+       led_state_R = HIGH;  digitalWrite(port_led_R, led_state_R);
+       Serial.print(F("71170:")); // left LED on 
+       Serial.println(response_window_start_time);
+       Serial.print(F("91170:")); // right LED on 
+       Serial.println(response_window_start_time);
+
 
        }
 

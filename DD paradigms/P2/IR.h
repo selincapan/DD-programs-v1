@@ -54,6 +54,8 @@ void record_IR() {
         // Nominally turns light off (bc its going to get turned on anyways)
         led_state_L = LOW;  digitalWrite(port_led_L, led_state_L);
         led_state_R = LOW;  digitalWrite(port_led_R, led_state_R);
+        Serial.print(F("71170:"));
+        Serial.println(millis());
 
         response_window_end_time = millis();
         Serial.print(F("5520:"));
@@ -141,6 +143,8 @@ if (read_gate_R != ir_previous_state_R) {
       // Nominally turns light off (bc its going to get turned on anyways)
       led_state_L = LOW;  digitalWrite(port_led_L, led_state_L);
       led_state_R = LOW;  digitalWrite(port_led_R, led_state_R);
+      Serial.print(F("91170:"));
+      Serial.println(millis());
 
       response_window_end_time = millis();
       Serial.print(F("5520:"));

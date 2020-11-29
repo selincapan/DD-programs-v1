@@ -21,7 +21,7 @@ void activate_middle_led() {
      if (solenoid_active_M == false) {
 
        // (PORT LIGHT ON) Turn on both LEDs if it is a valid trial
-         if ((valid_trial_window) && (led_state_L == LOW) && (led_state_R == LOW)){
+         if ((valid_response_window) && (led_state_L == LOW) && (led_state_R == LOW)){
 
            led_state_L = HIGH;
            led_state_R = HIGH;
@@ -33,22 +33,26 @@ void activate_middle_led() {
 
 
            // Both Stimulus Lights ON
-           Serial.print(F("6171:")); // Timestamp for Valid Light On
+           Serial.print(F("71171:"));  // Timestamp for Free Choice Valid Light On
+           Serial.println(led_on_time);
+           Serial.print(F("91171:"));  // Timestamp for Free Choice Valid Light On 
            Serial.println(led_on_time);
 
-           // RESET PORT COUNTER to count # of incorrect pokes during trial window (when both response port lights come on)
+
+           // RESET PORT COUNTER to count # of pokes during response window 
            left_port_counter = 0;
            mid_port_counter = 0;   
            right_port_counter = 0;
+
 
            }   // led is on HIGH
 
 
          // (VALID POKE - LIGHT OFF) if correct nose poke during valid trial window -> start reward window (type 1 = yes reward)
          // BOTH LIGHTS ON, poke in LEFT PORT
-         if ((valid_trial_window) && (led_state_L == HIGH) && (led_state_R == HIGH) && (poke_in_L) && (left_port_counter > 0)) {
+         if ((valid_response_window) && (led_state_L == HIGH) && (led_state_R == HIGH) && (poke_in_L) && (left_port_counter > 0)) {
 
-		       valid_trial_window = false;  // valid trial window ends and response window starts
+		       valid_response_window = false;  // valid initiation window ends and response window starts
 
            // turn of the LEDs
            led_state_L = LOW;           
@@ -59,7 +63,7 @@ void activate_middle_led() {
            led_off_time = millis();
            // Serial.print(F("Valid led Off:"));
 
-           Serial.print(F("7170:"));    // Timestamp for Valid Light Off
+           Serial.print(F("71170:"));    // Timestamp for Valid Light Off  (indicates a poke in which port led to reward) 
            Serial.println(led_off_time);
 
            // Serial.print("valid_poke_timer");
@@ -68,16 +72,15 @@ void activate_middle_led() {
 
            // CHANGED HERE (2/14/20) --> automatically subtracts one from relevant port to account for poke for reward
 
-           // POKEs during the TRIAL Window (during when response ports light on)
-            Serial.print("7589::");   // 75xx
+           // POKEs during the RESPONSE Window (during when response ports light on)
+            Serial.print("71589::");   // 715xx
             Serial.println(left_port_counter - 1);
-            Serial.print("8589::");    // 85xx
+            Serial.print("81589::");    // 815xx
             Serial.println(mid_port_counter);
-            Serial.print("9589::");  // 95xx
+            Serial.print("91589::");  // 915xx
             Serial.println(right_port_counter);
 
-           // RESET PORT COUNTER to count # of pokes during delay window 
-
+           // RESET PORT COUNTER to count # of pokes during reward delay  
            left_port_counter = 0;
            mid_port_counter = 0;   
            right_port_counter = 0;
@@ -89,14 +92,16 @@ void activate_middle_led() {
            // won't be counted toward the reward cue period! (reward cue period begins when the reward is dispensed) 
            led_state_M = HIGH;
            digitalWrite(port_led_M, led_state_M);
+
+           // reward window is NOT true here --> reward given after the delay! 
            
          }
 
          // (VALID POKE - LIGHT OFF) if correct nose poke during valid trial window -> start reward window (type 1 = yes reward)
          // BOTH LIGHTS ON, poke in RIGHT PORT
-         if ((valid_trial_window) && (led_state_L == HIGH) && (led_state_R == HIGH) && (poke_in_R) && (right_port_counter > 0)) {
+         if ((valid_response_window) && (led_state_L == HIGH) && (led_state_R == HIGH) && (poke_in_R) && (right_port_counter > 0)) {
 
-           valid_trial_window = false;  // valid trial window ends and response window starts
+           valid_response_window = false;  // valid trial window ends and response window starts
 
            // turn off both LEDs 
            led_state_L = LOW;
@@ -107,25 +112,24 @@ void activate_middle_led() {
            led_off_time = millis();
            // Serial.print(F("Valid led Off:"));
 
-           Serial.print(F("9170:"));    // Timestamp for Valid Light Off
+           Serial.print(F("91170:"));    // Timestamp for Valid Light Off  (indicates a poke in which port led to reward) 
            Serial.println(led_off_time);
 
            // Serial.print("valid_poke_timer");
            // Serial.println(valid_poke_timer);
 
            // CHANGED HERE (2/14/20) --> automatically subtracts one from relevant port to account for poke for reward
-
-            // POKEs during the TRIAL Window (during when response ports light on)
-            Serial.print("7589::");   // 75xx
+            // POKEs during the RESPONSE Window (during when response ports light on)
+            Serial.print("71589::");   // 75xx
             Serial.println(left_port_counter);
-            Serial.print("8589::");    // 85xx
+            Serial.print("81589::");    // 85xx
             Serial.println(mid_port_counter);
-            Serial.print("9589::");  // 95xx
+            Serial.print("91589::");  // 95xx
             Serial.println(right_port_counter - 1);
 
            // RESET PORT COUNTER for reward window 
            left_port_counter = 0;
-           mid_port_counter = 0;   //  (could also be a measure of incorrect pokes during a certain TIMEFRAME)
+           mid_port_counter = 0;   
            right_port_counter = 0;
 
            i = 3;     // 4 - i (i.e. 1) drops of reward will be given 
@@ -140,9 +144,9 @@ void activate_middle_led() {
         // OMISSION TRIAL
         // (NO RESPONSE - LIGHT OFF) // Essentially reward_type = 2 --> differentiated only by Event Code!!
           
-          if ((valid_trial_window) && (led_state_L == HIGH) && (led_state_R == HIGH) && (millis() - led_on_time > led_trial_duration)) {
+          if ((valid_response_window) && (led_state_L == HIGH) && (led_state_R == HIGH) && (millis() - led_on_time > led_trial_duration)) {
 
-          valid_trial_window = false;  // valid trial window ends and response window starts
+          valid_response_window = false;  // valid trial window ends and response window starts
 
           led_state_L = LOW;
           led_state_R = LOW;
@@ -152,15 +156,15 @@ void activate_middle_led() {
           led_off_time = millis();
           // Serial.print(F("Invalid led Off:"));
 
-          Serial.print(F("8540:"));    // Omission Trial END Timestamp (M PORT OMISSION)
+          Serial.print(F("81540:"));    // Free Choice Omission Trial Timestamp 
           Serial.println(led_off_time);
                   
-           // POKEs during the TRIAL Window (during when response ports light on)           
-           Serial.print("7589::");   // 75xx
+           // POKEs during the RESPONSE Window (during when response ports light on)           
+           Serial.print("71589::");   // 715xx
            Serial.println(left_port_counter);
-           Serial.print("8589::");    // 85xx
-           Serial.println(mid_port_counter);   // this will tell us if there were pokes in the middle port during the 10 second window
-           Serial.print("9589::");  // 95xx
+           Serial.print("81589::");    // 815xx
+           Serial.println(mid_port_counter);   
+           Serial.print("91589::");  // 915xx
            Serial.println(right_port_counter);
 
            // RESET PORT COUNTER to count # of pokes during the ITI WINDOW 
@@ -197,11 +201,11 @@ void activate_middle_sol () {
           initiate_reward_delay = false; 
 
           // # of poke counts during reward delay window (between trial port activation and reward dispensing)
-          Serial.print(F("7559::"));   // 75xx  (left counter during delay window)
+          Serial.print(F("71559::"));   // 715xx  
           Serial.println(left_port_counter);
-          Serial.print(F("8559::"));    // 85xx (middle counter during delay window)
+          Serial.print(F("81559::"));    // 815xx 
           Serial.println(mid_port_counter);
-          Serial.print(F("9559::"));  // 95xx    (right counter during delay window)
+          Serial.print(F("91559::"));  // 915xx  
           Serial.println(right_port_counter);
 
           // RESET poke_counter for reward window 
@@ -222,34 +226,28 @@ void activate_middle_sol () {
             reward_window = false;
             reward_type = 0; // toggle back to default value
 
-            //* solenoid on time = reward cue start time! tracks the first "drop" of reward was dispensed*//
-            solenoid_on_time = millis();  // will only be recorded at the begining; not for each drop 
-            Serial.print(F("8271:"));     // MIDDLE SOLENOID Timestamp for Valid Solenoid On
+            //* solenoid on time = reward cue start time! *//
+            solenoid_on_time = millis();   // will only be recorded at the begining; not for each drop 
+            Serial.print(F("81271:"));     // MIDDLE SOLENOID Timestamp for Free Choice Valid Solenoid On
             Serial.println(solenoid_on_time);
+
+            // Reward Cue ON (Reward Cue Window ON)
+            reward_cue_window = true;
+            led_state_M = HIGH;
+            digitalWrite(port_led_M, led_state_M); 
+
+            Serial.print(F("81171:"));    // Timestamp for FC Valid Light On
+            Serial.println(solenoid_on_time);
+
+            // REWARD WINDOW COUNTS (reset to count the number of reward window pokes) 
+            left_port_counter = 0;
+            mid_port_counter = 0;   
+            right_port_counter = 0;
             
 			      while (i <= 3) { //value of i determined when here is a left or right poke 
             	    solenoid_active_M = true;  // to prevent from going into the led loop
             	    sol_state_M = HIGH;
             	    digitalWrite(port_solenoid_M, sol_state_M);
-				
-      				    if ((i == 1) || (give_small_reward && i == 3)) {
-      
-                  		// before REWARD light comes on
-                      // only reset in the first iteration of the loop to get an accurate count! 
-                  		left_port_counter = 0;
-                 			mid_port_counter = 0;   
-                  		right_port_counter = 0;
-
-                      // Reward Cue ON (Reward Cue Window ON)
-                      reward_cue_window = true;
-                      led_state_M = HIGH;
-                      digitalWrite(port_led_M, led_state_M);
-      				     }
-
-                  //Serial.println("on duration "); 
-                  //Serial.println(millis() - solenoid_on_time); 
-                  //Serial.println("until "); 
-                  //Serial.println(i * solenoid_on_duration); 
   
                   // (SOL_OFF) reward_type = 1; --> After time for 1 drop expires, turn off solenoid 
                   // give 3 drops if you are giving large reward                  
@@ -258,6 +256,12 @@ void activate_middle_sol () {
                     solenoid_active_M = false;   // can now activate the leds
                     sol_state_M = LOW;
                     digitalWrite(port_solenoid_M, sol_state_M);
+
+                    if (i != 3) {
+                      Serial.print(F("81270:"));
+                      Serial.println(millis()); 
+                    }
+                    
                     i = i + 1; 
                     delay(5);    //puts a 5 ms delay between each drop to ensure the "clicks" are distinguishable
                   }
@@ -277,7 +281,7 @@ void activate_middle_sol () {
             solenoid_off_time = millis();
             // Serial.print(F("valid_solenoid_off:"));
 
-            Serial.print(F("8270:"));   // Timestamp for Valid Solenoid Off
+            Serial.print(F("81270:"));   // Timestamp for Free Choice Valid Solenoid Off
             Serial.println(solenoid_off_time);
 
         }
@@ -291,7 +295,7 @@ void activate_middle_sol () {
              reward_cue_off_time = millis();
              // Serial.print(F("Invalid led Off:"));
 
-             Serial.print(F("8170:"));    // Omission Trial END Timestamp (M PORT OMISSION)
+             Serial.print(F("81170:"));    // Valid LED off 
              Serial.println(reward_cue_off_time);
 
              if (give_small_reward) {   // increase the ITI length by the delay length for small_reward trials
@@ -306,11 +310,11 @@ void activate_middle_sol () {
              }
               
              // POKEs during the REWARD Window
-             Serial.print("7549::");   // 75xx
+             Serial.print("71549::");   // 715xx
              Serial.println(left_port_counter);
-             Serial.print("8549::");    // 85xx
+             Serial.print("81549::");    // 815xx
              Serial.println(mid_port_counter);
-             Serial.print("9549::");  // 95xx
+             Serial.print("91549::");  // 915xx
              Serial.println(right_port_counter);
 
              // reset any port counters before ITI WINDOW starts 
@@ -344,7 +348,7 @@ void activate_middle_sol () {
            }
 
            // increase the length of the ITI window for small reward trials 
-           // /ensures the large and small reward trials take the same amount of time to complete (choosing small reward != ability to do more trials)
+           // ensures the large and small reward trials take the same amount of time to complete (choosing small reward != ability to do more trials)
            if (initiate_iti_delay) { 
             
               //initiate regular ITI window after reward_delay_duration has passed
@@ -366,11 +370,11 @@ void activate_middle_sol () {
               if ((millis() - iti_start_time) >= iti_interval[random_idx]) {
 
                 // # of poke counts during iti window (+ iti delay if applicable) 
-                Serial.print("7519::");   // 75xx
+                Serial.print("71519::");   // 715xx
                 Serial.println(left_port_counter);
-                Serial.print("8519::");    // 85xx
+                Serial.print("81519::");    // 815xx
                 Serial.println(mid_port_counter);
-                Serial.print("9519::");  // 95xx
+                Serial.print("91519::");  // 915xx
                 Serial.println(right_port_counter);
 
                 get_random_iti = true;
@@ -382,9 +386,9 @@ void activate_middle_sol () {
                 // Serial.println(iti_interval[random_idx]);
 
 
-                // RESETTING counters before new trial starts (to count # of pokes made during trial window)
-                left_port_counter = 0;  // reset any port counters before TRIAL WINDOW starts (so that any invalid pokes get resetted during iti window)
-                mid_port_counter = 0;   //  (could also be a measure of incorrect pokes during a certain TIMEFRAME)
+                // RESETTING counters before new trial starts 
+                left_port_counter = 0;  
+                mid_port_counter = 0;  
                 right_port_counter = 0;
 
                 // RESET current_port so that leds and solenoids don't get activated again
