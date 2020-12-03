@@ -42,7 +42,7 @@ void activate_left_led() {
            valid_response_window = false;  // valid response window ends and reward window starts
 
            led_state_L = LOW;
-           digitalWrite(port_led_R, led_state_R);
+           digitalWrite(port_led_L, led_state_L);
 
            led_off_time = millis();
            // Serial.print(F("Valid led Off:"));
@@ -110,7 +110,7 @@ void activate_left_led() {
             valid_response_window = false;  // valid response window ends and ITI window starts
 
             led_state_L = LOW;
-            digitalWrite(port_led_R, led_state_R);
+            digitalWrite(port_led_L, led_state_L);
 
             led_off_time = millis();
             // Serial.print(F("Invalid led Off:"));

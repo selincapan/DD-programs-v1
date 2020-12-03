@@ -8,10 +8,10 @@
 //int wait_interval_R[NUM_TIMES] = {7000, 3000, 3000, 9000, 11000};
 
 #define NUM_TIMES 12
-//unsigned long iti_interval[NUM_TIMES] = {30000, 32000, 34000, 37000, 40000, 45000, 47000, 50000, 51000, 55000, 57000, 60000};
+unsigned long iti_interval[NUM_TIMES] = {30000, 32000, 34000, 37000, 40000, 45000, 47000, 50000, 51000, 55000, 57000, 60000};
 
 // TEST ITIs
-unsigned long iti_interval[NUM_TIMES] = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000};
+//unsigned long iti_interval[NUM_TIMES] = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000};
 //unsigned long iti_interval[NUM_TIMES] = {6000, 5000, 5000, 6000, 6000, 6000, 5000, 6000, 6000, 6000, 6000, 6000};
 
 // Durations

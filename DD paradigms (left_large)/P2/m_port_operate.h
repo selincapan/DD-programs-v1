@@ -75,9 +75,9 @@ void activate_middle_port() {
           // # of poke counts during reward window (between when reward is given and reward cue turns off) 
           Serial.print("71549::");   // 715xx
           Serial.println(left_port_counter);
-          Serial.print("71549::");    // 815xx
+          Serial.print("81549::");    // 815xx
           Serial.println(mid_port_counter);
-          Serial.print("71549::");  // 915xx
+          Serial.print("91549::");  // 915xx
           Serial.println(right_port_counter);
 
           // RESET counter for poke counts during iti window

@@ -38,9 +38,9 @@ void record_IR() {
         // # of poke counts during response window (free choice event code, since both L and R port leads to reward) 
         Serial.print(F("71589::"));   // 715xx
         Serial.println(left_port_counter - 1);
-        Serial.print(F("71589::"));    // 815xx
+        Serial.print(F("81589::"));    // 815xx
         Serial.println(mid_port_counter);
-        Serial.print(F("71589::"));  // 915xx
+        Serial.print(F("91589::"));  // 915xx
         Serial.println(right_port_counter);
 
         left_port_counter = 0;
@@ -127,9 +127,9 @@ if (read_gate_R != ir_previous_state_R) {
       // # of poke counts during response window (free choice event code, since both L and R port leads to reward) 
       Serial.print(F("71589::"));   // 715xx
       Serial.println(left_port_counter);
-      Serial.print(F("71589::"));    // 815xx
+      Serial.print(F("81589::"));    // 815xx
       Serial.println(mid_port_counter);
-      Serial.print(F("71589::"));  // 915xx
+      Serial.print(F("91589::"));  // 915xx
       Serial.println(right_port_counter-1);
 
       left_port_counter = 0;

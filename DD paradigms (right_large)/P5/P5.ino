@@ -67,7 +67,7 @@
 #include "l_port_operate.h" //used in FC trials
 #include "r_port_operate.h" //used in FC trials 
 
-String paradigm = "DD_P5_rl_v1"; // rl = right large (right port is the large reward port) 
+String paradigm = "DD_P5_rl_vf"; // rl = right large (right port is the large reward port) 
 
 // * * * * * * * * * * * S E T U P * * * * * * * * * * * * * * *
 

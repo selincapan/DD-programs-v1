@@ -35,9 +35,9 @@ void begin_new_trial() {
        // Turn ON Left / Right LED (Stimulus Ports)
        led_state_L = HIGH;  digitalWrite(port_led_L, led_state_L);
        led_state_R = HIGH;  digitalWrite(port_led_R, led_state_R);
-       Serial.print(F("71170:")); // left LED on 
+       Serial.print(F("71171:")); // left LED on 
        Serial.println(response_window_start_time);
-       Serial.print(F("91170:")); // right LED on 
+       Serial.print(F("91171:")); // right LED on 
        Serial.println(response_window_start_time);
 
 
